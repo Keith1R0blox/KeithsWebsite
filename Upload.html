@@ -227,98 +227,98 @@ button:hover {
         <div id="uploadHistory"></div>
     </div>
     <script>
-document.addEventListener('DOMContentLoaded', function() {
-    const uploadForm = document.getElementById('uploadForm');
-
-    uploadForm.addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        const url = document.getElementById('url').value;
-        const title = document.getElementById('title').value;
-        const description = document.getElementById('description').value;
-        const imageInput = document.getElementById('image');
-        const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
-        const username = loggedInUser ? loggedInUser.username : 'Anonymous';
-        let imageUrl = 'default-image.png'; // Default image URL
-
-        if (imageInput.files && imageInput.files[0]) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                imageUrl = e.target.result;
-                saveWebsite(url, title, description, imageUrl, username);
-            };
-            reader.readAsDataURL(imageInput.files[0]);
-        } else {
-            saveWebsite(url, title, description, imageUrl, username);
-        }
-    });
-
-    function saveWebsite(url, title, description, imageUrl, username) {
-        const websiteData = {
-            url: url,
-            title: title,
-            description: description,
-            imageUrl: imageUrl,
-            username: username
-        };
-
-        let websites = JSON.parse(localStorage.getItem('websites')) || [];
-        websites.push(websiteData);
-        localStorage.setItem('websites', JSON.stringify(websites));
-
-        // Save to user's upload history
-        let userHistory = JSON.parse(localStorage.getItem(username + '_history')) || [];
-        userHistory.push(websiteData);
-        localStorage.setItem(username + '_history', JSON.stringify(userHistory));
-
-        // Clear the form
-        uploadForm.reset();
-
-        // Update the upload history display
-        displayUploadHistory(username);
-    }
-
-    function displayUploadHistory(username) {
-        const historyContainer = document.getElementById('uploadHistory');
-        historyContainer.innerHTML = ''; // Clear previous history
-
-        let userHistory = JSON.parse(localStorage.getItem(username + '_history')) || [];
-        userHistory.forEach(website => {
-            const websiteButton = document.createElement('a');
-            websiteButton.href = website.url;
-            websiteButton.className = 'roblox-button';
-            websiteButton.target = '_blank';
-
-            const img = document.createElement('img');
-            img.src = website.imageUrl;
-            img.alt = website.title;
-
-            const h3 = document.createElement('h3');
-            h3.textContent = website.title;
-
-            const h4 = document.createElement('h4');
-            h4.textContent = website.description;
-
-            const p = document.createElement('p');
-            p.textContent = `by ${website.username}`;
-
-            websiteButton.appendChild(img);
-            websiteButton.appendChild(h3);
-            if (website.description) {
-                websiteButton.appendChild(h4);
+        document.addEventListener('DOMContentLoaded', function() {
+            const uploadForm = document.getElementById('uploadForm');
+    
+            uploadForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+    
+                const url = document.getElementById('url').value;
+                const title = document.getElementById('title').value;
+                const description = document.getElementById('description').value;
+                const imageInput = document.getElementById('image');
+                const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+                const username = loggedInUser ? loggedInUser.username : 'Anonymous';
+                let imageUrl = 'default-image.png'; // Default image URL
+    
+                if (imageInput.files && imageInput.files[0]) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        imageUrl = e.target.result;
+                        saveWebsite(url, title, description, imageUrl, username);
+                    };
+                    reader.readAsDataURL(imageInput.files[0]);
+                } else {
+                    saveWebsite(url, title, description, imageUrl, username);
+                }
+            });
+    
+            function saveWebsite(url, title, description, imageUrl, username) {
+                const websiteData = {
+                    url: url,
+                    title: title,
+                    description: description,
+                    imageUrl: imageUrl,
+                    username: username
+                };
+    
+                let websites = JSON.parse(localStorage.getItem('websites')) || [];
+                websites.push(websiteData);
+                localStorage.setItem('websites', JSON.stringify(websites));
+    
+                // Save to user's upload history
+                let userHistory = JSON.parse(localStorage.getItem(username + '_history')) || [];
+                userHistory.push(websiteData);
+                localStorage.setItem(username + '_history', JSON.stringify(userHistory));
+    
+                // Clear the form
+                uploadForm.reset();
+    
+                // Update the upload history display
+                displayUploadHistory(username);
             }
-            websiteButton.appendChild(p);
-
-            historyContainer.appendChild(websiteButton);
+    
+            function displayUploadHistory(username) {
+                const historyContainer = document.getElementById('uploadHistory');
+                historyContainer.innerHTML = ''; // Clear previous history
+    
+                let userHistory = JSON.parse(localStorage.getItem(username + '_history')) || [];
+                userHistory.forEach(website => {
+                    const websiteButton = document.createElement('a');
+                    websiteButton.href = website.url;
+                    websiteButton.className = 'roblox-button';
+                    websiteButton.target = '_blank';
+    
+                    const img = document.createElement('img');
+                    img.src = website.imageUrl;
+                    img.alt = website.title;
+    
+                    const h3 = document.createElement('h3');
+                    h3.textContent = website.title;
+    
+                    const h4 = document.createElement('h4');
+                    h4.textContent = website.description;
+    
+                    const p = document.createElement('p');
+                    p.textContent = `by ${website.username}`;
+    
+                    websiteButton.appendChild(img);
+                    websiteButton.appendChild(h3);
+                    if (website.description) {
+                        websiteButton.appendChild(h4);
+                    }
+                    websiteButton.appendChild(p);
+    
+                    historyContainer.appendChild(websiteButton);
+                });
+            }
+    
+            // Display the upload history for the logged-in user
+            const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+            if (loggedInUser) {
+                displayUploadHistory(loggedInUser.username);
+            }
         });
-    }
-
-    // Display the upload history for the logged-in user
-    const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
-    if (loggedInUser) {
-        displayUploadHistory(loggedInUser.username);
-    }
-});
     </script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
