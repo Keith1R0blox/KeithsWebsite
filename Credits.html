@@ -95,10 +95,16 @@
             <img src="keith1-3-12-2025.png" class="logo">
 
     <div class="content">
-        <div class = "contentlinks">
-            <a href = "index.html">Home</a>
-            <a href = "More.html">More</a>
-            <a href = "Credits.html">Credits</a>
+        <div class="contentlinks">
+            <a href="index.html">Home</a>
+            <a href="Websites.html">Websites</a>
+            <a href="Upload.html">Upload</a>
+            <a href="More.html">More</a>
+            <a href="logs.html">Changelog</a>
+            <a href="Credits.html">Credits</a>
+            <a id="login1" href="login.html">Login</a>
+            <a id="signup1" href="signup.html">Sign Up</a>
+            <a id="logout" href="logout.html" style="display: none;">Logout</a>
         </div>
     </div>
     </div>
@@ -108,4 +114,32 @@
         <h2>GitHub copilot: also does most of the coding</h2>
         <h2>textstudio: my website's logo, which is this website <a href="https://www.textstudio.com/">here</a></h2>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginButton = document.getElementById('login1');
+            const signupButton = document.getElementById('signup1');
+            const logoutButton = document.getElementById('logout');
+    
+            function renderAuthButtons() {
+                const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+                if (loggedInUser) {
+                    loginButton.style.display = 'none';
+                    signupButton.style.display = 'none';
+                    logoutButton.style.display = 'inline';
+                } else {
+                    loginButton.style.display = 'inline';
+                    signupButton.style.display = 'inline';
+                    logoutButton.style.display = 'none';
+                }
+            }
+    
+            logoutButton.addEventListener('click', function() {
+                localStorage.removeItem('loggedInUser');
+                renderAuthButtons();
+            });
+    
+            renderAuthButtons();
+        });
+    </script>
 </html>

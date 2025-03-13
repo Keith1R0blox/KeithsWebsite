@@ -114,7 +114,6 @@
         font-family: 'Source Sans 3', sans-serif;
     }
 
-
     
 </style>
 <style>
@@ -128,16 +127,71 @@
     <div class="content">
         <div class = "contentlinks">
             <a href = "index.html">Home</a>
+            <a href = "Websites.html">Websites</a>
+            <a href = "Upload.html">Upload</a>
             <a href = "More.html">More</a>
+            <a href = "logs.html">Changelog</a>
             <a href = "Credits.html">Credits</a>
+            <a id = "login1" href= "login.html">login</a>
+            <a id = "signup1" href= "signup.html">signup</a>
+            <a id = "logout" href= "logout.html">logout</a>
         </div>
     </div>
     </div>
-    <div class = "maincontent">
-        <h1>welcome!</h1>
-    </div>
-    <a href="https://keith1r0blox.github.io/pmoplace/" class="roblox-button">
-        <img src="tspmo.png" alt="pmoplace">
-        <h3>pmoplace</h3>
-        <h4>first ever website!</h4>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginButton = document.getElementById('login1');
+            const signupButton = document.getElementById('signup1');
+            const logoutButton = document.getElementById('logout');
+            const welcomeMessage = document.getElementById('welcomeMessage');
+            const adminModeToggle = document.getElementById('adminModeToggle');
+    
+            function renderAuthButtons() {
+                const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
+                if (loggedInUser) {
+                    loginButton.style.display = 'none';
+                    signupButton.style.display = 'none';
+                    logoutButton.style.display = 'inline';
+                    welcomeMessage.textContent = `Welcome, ${loggedInUser.username}!`;
+                    if (loggedInUser.username === 'Keith1Roblox') {
+                        adminModeToggle.style.display = 'inline';
+                    } else {
+                        adminModeToggle.style.display = 'none';
+                    }
+                } else {
+                    loginButton.style.display = 'inline';
+                    signupButton.style.display = 'inline';
+                    logoutButton.style.display = 'none';
+                    welcomeMessage.textContent = 'Welcome!';
+                    adminModeToggle.style.display = 'none';
+                }
+            }
+    
+            logoutButton.addEventListener('click', function() {
+                localStorage.removeItem('loggedInUser');
+                renderAuthButtons();
+            });
+    
+            adminModeToggle.addEventListener('click', function() {
+                const isAdminMode = localStorage.getItem('adminMode') === 'true';
+                localStorage.setItem('adminMode', !isAdminMode);
+                adminModeToggle.textContent = isAdminMode ? 'Enable Admin Mode' : 'Disable Admin Mode';
+            });
+    
+            renderAuthButtons();
+        });
+    </script>
+    
+<div class="maincontent">
+    <h1 id="welcomeMessage">Welcome!</h1>
+    <button id="adminModeToggle" style="display: none;">Enable Admin Mode</button>
+</div>
+
+   <div class="maincontent">
+    <h1>recomended websites</h1>
+</div>
+
+
 </html>
