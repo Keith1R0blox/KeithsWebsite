@@ -7,10 +7,8 @@
     <link rel = "stylesheet" href = "idk.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
-</head>
-<body>
-<style>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900&display=swap" rel="stylesheet">
+    <style>
     body {
         margin: 0;
         display: flex;
@@ -23,7 +21,7 @@
         width: 100%;
         background: rgb(19, 119, 201);
         padding: 5px 20px;
-        position: flex;
+        position: fixed;
         z-index: 1;
         align-items: center;
         justify-content: space-between;
@@ -69,6 +67,11 @@
     .maincontent {
         margin-top: 20px;
         padding: 20px;
+        gap: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
     }
 
     .maincontent h1 {
@@ -76,6 +79,7 @@
         color: rgb(0, 0, 0);
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         font-weight: lighter;
+        margin-bottom: 20px;
     }
 
     .roblox-button {
@@ -114,84 +118,57 @@
         font-family: 'Source Sans 3', sans-serif;
     }
 
+    .maincontent {
+        margin-top: 40px;
+        padding: 20px;
+        display: flex;
+        flex-direction: flex-start;
+        align-items: flex-start;
+        width: fit-content;
+        height: 100%;
+        position: fixed;
+        gap: 20px;
+    }
+    .maincontent h1 {
+        font-size: 60px;
+        color: rgb(0, 0, 0);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-weight: lighter;
+    }
+
+    .maincontent h2 {
+        font-size: 40px;
+        color: rgb(0, 0, 0);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-weight: lighter;
+    }
     
-</style>
-<style>
-</style>
-</body>
+
     
+    </style>
+</head>
+<body>
     <div class="topbar">
         <div class="topbar-content">
             <img src="keith1-3-12-2025.png" class="logo">
 
     <div class="content">
-        <div class = "contentlinks">
-            <a href = "index.html">Home</a>
-            <a href = "Websites.html">Websites</a>
-            <a href = "Upload.html">Upload</a>
-            <a href = "More.html">More</a>
-            <a href = "logs.html">Changelog</a>
-            <a href = "Credits.html">Credits</a>
-            <a id = "login1" href= "login.html">login</a>
-            <a id = "signup1" href= "signup.html">signup</a>
-            <a id = "logout" href= "logout.html">logout</a>
+        <div class="contentlinks">
+            <a href="index.html">Home</a>
+            <a href="More.html">More</a>
+            <a href="logs.html">Changelog</a>
+            <a href="Credits.html">Credits</a>
+        </div>
         </div>
     </div>
-    </div>
-
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const loginButton = document.getElementById('login1');
-            const signupButton = document.getElementById('signup1');
-            const logoutButton = document.getElementById('logout');
-            const welcomeMessage = document.getElementById('welcomeMessage');
-            const adminModeToggle = document.getElementById('adminModeToggle');
-    
-            function renderAuthButtons() {
-                const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
-                if (loggedInUser) {
-                    loginButton.style.display = 'none';
-                    signupButton.style.display = 'none';
-                    logoutButton.style.display = 'inline';
-                    welcomeMessage.textContent = `Welcome, ${loggedInUser.username}!`;
-                    if (loggedInUser.username === 'Keith1Roblox') {
-                        adminModeToggle.style.display = 'inline';
-                    } else {
-                        adminModeToggle.style.display = 'none';
-                    }
-                } else {
-                    loginButton.style.display = 'inline';
-                    signupButton.style.display = 'inline';
-                    logoutButton.style.display = 'none';
-                    welcomeMessage.textContent = 'Welcome!';
-                    adminModeToggle.style.display = 'none';
-                }
-            }
-    
-            logoutButton.addEventListener('click', function() {
-                localStorage.removeItem('loggedInUser');
-                renderAuthButtons();
-            });
-    
-            adminModeToggle.addEventListener('click', function() {
-                const isAdminMode = localStorage.getItem('adminMode') === 'true';
-                localStorage.setItem('adminMode', !isAdminMode);
-                adminModeToggle.textContent = isAdminMode ? 'Enable Admin Mode' : 'Disable Admin Mode';
-            });
-    
-            renderAuthButtons();
-        });
-    </script>
-    
+</div>
 <div class="maincontent">
     <h1 id="welcomeMessage">Welcome!</h1>
-    <button id="adminModeToggle" style="display: none;">Enable Admin Mode</button>
+    <h2 id="welcomeMessage">welcome to my site! <a href="More.html">click here</a> or navigate through the topbar to get started!</h2>
 </div>
-
-   <div class="maincontent">
-    <h1>recomended websites</h1>
 </div>
 
 
+
+</body>
 </html>
